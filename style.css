@@ -1,0 +1,147 @@
+body {
+	font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	background-color: #333;
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+}
+
+h1 {
+	margin: 0;
+}
+
+main {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.courses {
+    display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 20px;
+    padding-bottom: 30px;
+}
+
+h2 {
+    text-align: center;
+	margin-top: 0;
+}
+
+article {
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+img {
+	display: block;
+	margin: 0 auto;
+	max-width: 100%;
+	height: auto;
+	border-radius: 5px;
+}
+
+h3 {
+	margin: 10px 0;
+	font-size: 1.2rem;
+	text-align: center;
+}
+
+nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+}
+
+nav li {
+	margin: 0 10px;
+}
+
+nav a {
+	display: block;
+	background-color: #333;
+	color: #fff;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+}
+
+nav a:hover {
+	background-color: #666;
+}
+
+p {
+	margin: 5px 0;
+	text-align: center;
+}
+
+.course-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.lesson {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+}
+
+.lesson-title {
+    text-align: left;
+    margin: 0;
+}
+
+.lesson a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+.lesson a:hover {
+    background-color: #ddd;
+}
+
+.restricted {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.school-name {
+    text-align: center;
+    color: #333;
+}
+
+.course-title {
+    color: #333;
+}
