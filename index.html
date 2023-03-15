@@ -3,84 +3,272 @@
 <head>
 	<title>My School</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
 </head>
 <body>
 	<header>
-		<h1>My School</h1>
+		<a href="index.html" class="logo" title="Homepage">Inna Slota.</a>
+
+      <ul class="navlist">
+        <li>
+          <a href="#home" class="active navlink" title="Home">Home</a>
+        </li>
+        <li>
+          <a href="#courses-section" class="navlink" title="About Me">Courses</a>
+        </li>
+        <li>
+          <a href="#techstack" class="navlink" title="Tech Stack">Tech Stack</a>
+        </li>
+        <li>
+          <a href="#portfolio" class="navlink" title="My Projects"
+            >My Projects</a
+          >
+        </li>
+        <li>
+          <a href="#contact" class="navlink" title="Contact Me">Contact Me</a>
+        </li>
+        <!--
+        <li class="theme-toggle">
+          <div>
+            <input type="checkbox" class="checkbox" id="chk" />
+            <label class="label" for="chk">
+              <i class="bx bx-sun" title="Ligth theme"></i>
+              <i class="bx bx-moon" title="Dark theme"></i>
+              <div class="ball"></div>
+            </label>
+          </div>
+        </li>
+      </ul>
+    -->
+
+      <div class="bx bx-menu" id="menu-icon"></div>
 	</header>
 	<main>
-		<section>
-			<h2>Courses</h2>
+		<section class="main-section">
+            <div class="home-text">
+                <div class="slide">
+                    <span class="one">Upgrade</span>
+                    <span class="two">Yourself</span>
+                </div>
+                <h1>Upgrade</h1>
+                <h3>Yourself</h3>
+                <p>Welcome to our online school! We are dedicated to providing quality education to students from the comfort and safety of their own homes. Our virtual classrooms allow students to interact with teachers and classmates in real-time, just like in a traditional classroom setting. We offer a wide range of courses to suit every student's needs, from elementary school to high school. </p>
+                <div class="button">
+                    <a href="#courses-section" class="btn">View courses</a>
+                </div>
+            </div>
+		</section>
+        <section class="courses-section" id="courses-section">
+            <div class="main-text">
+                <p>Check out the opportunities</p>
+                <h2><span>Latest</span> Courses</h2>
+            </div>
             <div class="courses">
                 <article>
-                    <img src="course1.jpg" alt="Course 1">
-                    <h3><a href="coursepage.html">Course 1</a></h3>
-                    <p>Number of lessons: 10</p>
-                    <p>Skills: Skill 1, Skill 2, Skill 3</p>
-                    <p>Rating: 4.5 stars</p>
+                    <img src="images/course.jpg" alt="Course 1">
+                    <div class="lessons-number">
+                        <a href="#portfolio" class="btn2"><i class="bx bx-play" title="Watch My Work"></i> 10 Lessons</a>
+                    </div>
+                    <h3><a href="coursepage.html" class="course-link">This is your course title. It should be places here</a></h3>
+                    <div class="description-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>API</span>
+                    </div>
+                    <div class="stars">
+                        <span class="star" data-value="1"></span>
+                        <span class="star" data-value="2"></span>
+                        <span class="star" data-value="3"></span>
+                        <span class="star" data-value="4"></span>
+                        <span class="star" data-value="5"></span>
+                      </div>
                 </article>
                 <article>
-                    <img src="course1.jpg" alt="Course 1">
-                    <h3>Course 2</h3>
-                    <p>Number of lessons: 10</p>
-                    <p>Skills: Skill 1, Skill 2, Skill 3</p>
-                    <p>Rating: 4.5 stars</p>
+                    <img src="images/course.jpg" alt="Course 1">
+                    <div class="lessons-number">
+                        <a href="#portfolio" class="btn2"><i class="bx bx-play" title="Watch My Work"></i> 10 Lessons</a>
+                    </div>
+                    <h3><a href="coursepage.html" class="course-link">This is your course title. It should be places here</a></h3>
+                    <div class="description-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>API</span>
+                    </div>
+                    <div class="stars">
+                        <span class="star" data-value="1"></span>
+                        <span class="star" data-value="2"></span>
+                        <span class="star" data-value="3"></span>
+                        <span class="star" data-value="4"></span>
+                        <span class="star" data-value="5"></span>
+                      </div>
                 </article>
                 <article>
-                    <img src="course1.jpg" alt="Course 1">
-                    <h3>Course 3</h3>
-                    <p>Number of lessons: 10</p>
-                    <p>Skills: Skill 1, Skill 2, Skill 3</p>
-                    <p>Rating: 4.5 stars</p>
+                    <img src="images/course.jpg" alt="Course 1">
+                    <div class="lessons-number">
+                        <a href="#portfolio" class="btn2"><i class="bx bx-play" title="Watch My Work"></i> 10 Lessons</a>
+                    </div>
+                    <h3><a href="coursepage.html" class="course-link">This is your course title. It should be places here</a></h3>
+                    <div class="description-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>API</span>
+                    </div>
+                    <div class="stars">
+                        <span class="star" data-value="1"></span>
+                        <span class="star" data-value="2"></span>
+                        <span class="star" data-value="3"></span>
+                        <span class="star" data-value="4"></span>
+                        <span class="star" data-value="5"></span>
+                      </div>
                 </article>
                 <article>
-                    <img src="course1.jpg" alt="Course 1">
-                    <h3>Course 4</h3>
-                    <p>Number of lessons: 10</p>
-                    <p>Skills: Skill 1, Skill 2, Skill 3</p>
-                    <p>Rating: 4.5 stars</p>
+                    <img src="images/course.jpg" alt="Course 1">
+                    <div class="lessons-number">
+                        <a href="#portfolio" class="btn2"><i class="bx bx-play" title="Watch My Work"></i> 10 Lessons</a>
+                    </div>
+                    <h3><a href="coursepage.html" class="course-link">This is your course title. It should be places here</a></h3>
+                    <div class="description-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>API</span>
+                    </div>
+                    <div class="stars">
+                        <span class="star" data-value="1"></span>
+                        <span class="star" data-value="2"></span>
+                        <span class="star" data-value="3"></span>
+                        <span class="star" data-value="4"></span>
+                        <span class="star" data-value="5"></span>
+                      </div>
                 </article>
                 <article>
-                    <img src="course1.jpg" alt="Course 1">
-                    <h3>Course 5</h3>
-                    <p>Number of lessons: 10</p>
-                    <p>Skills: Skill 1, Skill 2, Skill 3</p>
-                    <p>Rating: 4.5 stars</p>
+                    <img src="images/course.jpg" alt="Course 1">
+                    <div class="lessons-number">
+                        <a href="#portfolio" class="btn2"><i class="bx bx-play" title="Watch My Work"></i> 10 Lessons</a>
+                    </div>
+                    <h3><a href="coursepage.html" class="course-link">This is your course title. It should be places here</a></h3>
+                    <div class="description-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>API</span>
+                    </div>
+                    <div class="stars">
+                        <span class="star" data-value="1"></span>
+                        <span class="star" data-value="2"></span>
+                        <span class="star" data-value="3"></span>
+                        <span class="star" data-value="4"></span>
+                        <span class="star" data-value="5"></span>
+                      </div>
                 </article>
                 <article>
-                    <img src="course1.jpg" alt="Course 1">
-                    <h3>Course 6</h3>
-                    <p>Number of lessons: 10</p>
-                    <p>Skills: Skill 1, Skill 2, Skill 3</p>
-                    <p>Rating: 4.5 stars</p>
+                    <img src="images/course.jpg" alt="Course 1">
+                    <div class="lessons-number">
+                        <a href="#portfolio" class="btn2"><i class="bx bx-play" title="Watch My Work"></i> 10 Lessons</a>
+                    </div>
+                    <h3><a href="coursepage.html" class="course-link">This is your course title. It should be places here</a></h3>
+                    <div class="description-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>API</span>
+                    </div>
+                    <div class="stars">
+                        <span class="star" data-value="1"></span>
+                        <span class="star" data-value="2"></span>
+                        <span class="star" data-value="3"></span>
+                        <span class="star" data-value="4"></span>
+                        <span class="star" data-value="5"></span>
+                      </div>
                 </article>
                 <article>
-                    <img src="course1.jpg" alt="Course 1">
-                    <h3>Course 7</h3>
-                    <p>Number of lessons: 10</p>
-                    <p>Skills: Skill 1, Skill 2, Skill 3</p>
-                    <p>Rating: 4.5 stars</p>
+                    <img src="images/course.jpg" alt="Course 1">
+                    <div class="lessons-number">
+                        <a href="#portfolio" class="btn2"><i class="bx bx-play" title="Watch My Work"></i> 10 Lessons</a>
+                    </div>
+                    <h3><a href="coursepage.html" class="course-link">This is your course title. It should be places here</a></h3>
+                    <div class="description-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>API</span>
+                    </div>
+                    <div class="stars">
+                        <span class="star" data-value="1"></span>
+                        <span class="star" data-value="2"></span>
+                        <span class="star" data-value="3"></span>
+                        <span class="star" data-value="4"></span>
+                        <span class="star" data-value="5"></span>
+                      </div>
                 </article>
                 <article>
-                    <img src="course1.jpg" alt="Course 1">
-                    <h3>Course 8</h3>
-                    <p>Number of lessons: 10</p>
-                    <p>Skills: Skill 1, Skill 2, Skill 3</p>
-                    <p>Rating: 4.5 stars</p>
+                    <img src="images/course.jpg" alt="Course 1">
+                    <div class="lessons-number">
+                        <a href="#portfolio" class="btn2"><i class="bx bx-play" title="Watch My Work"></i> 10 Lessons</a>
+                    </div>
+                    <h3><a href="coursepage.html" class="course-link">This is your course title. It should be places here</a></h3>
+                    <div class="description-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>API</span>
+                    </div>
+                    <div class="stars">
+                        <span class="star" data-value="1"></span>
+                        <span class="star" data-value="2"></span>
+                        <span class="star" data-value="3"></span>
+                        <span class="star" data-value="4"></span>
+                        <span class="star" data-value="5"></span>
+                      </div>
                 </article>
                 <article>
-                    <img src="course1.jpg" alt="Course 1">
-                    <h3>Course 9</h3>
-                    <p>Number of lessons: 10</p>
-                    <p>Skills: Skill 1, Skill 2, Skill 3</p>
-                    <p>Rating: 4.5 stars</p>
+                    <img src="images/course.jpg" alt="Course 1">
+                    <div class="lessons-number">
+                        <a href="#portfolio" class="btn2"><i class="bx bx-play" title="Watch My Work"></i> 10 Lessons</a>
+                    </div>
+                    <h3><a href="coursepage.html" class="course-link">This is your course title. It should be places here</a></h3>
+                    <div class="description-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>API</span>
+                    </div>
+                    <div class="stars">
+                        <span class="star" data-value="1"></span>
+                        <span class="star" data-value="2"></span>
+                        <span class="star" data-value="3"></span>
+                        <span class="star" data-value="4"></span>
+                        <span class="star" data-value="5"></span>
+                      </div>
                 </article>
                 <article>
-                    <img src="course1.jpg" alt="Course 1">
-                    <h3>Course 10</h3>
-                    <p>Number of lessons: 10</p>
-                    <p>Skills: Skill 1, Skill 2, Skill 3</p>
-                    <p>Rating: 4.5 stars</p>
+                    <img src="images/course.jpg" alt="Course 1">
+                    <div class="lessons-number">
+                        <a href="#portfolio" class="btn2"><i class="bx bx-play" title="Watch My Work"></i> 10 Lessons</a>
+                    </div>
+                    <h3><a href="coursepage.html" class="course-link">This is your course title. It should be places here</a></h3>
+                    <div class="description-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>API</span>
+                    </div>
+                    <div class="stars">
+                        <span class="star" data-value="1"></span>
+                        <span class="star" data-value="2"></span>
+                        <span class="star" data-value="3"></span>
+                        <span class="star" data-value="4"></span>
+                        <span class="star" data-value="5"></span>
+                      </div>
                 </article>
             </div>
 			<nav>
@@ -90,10 +278,13 @@
 					<li><a href="#">3</a></li>
 				</ul>
 			</nav>
-		</section>
+        </section>
 	</main>
 	<footer>
-		<p>&copy; 2023 My School</p>
+		<p>&copy; 2023. My School<br />
+            This project is coded by Inna Slota and <a href="https://github.com/innaslota/education-platform">open-sourced</a>
+        </p>
+        
 	</footer>
 </body>
 </html>

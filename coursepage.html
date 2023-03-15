@@ -3,38 +3,117 @@
 <head>
 	<title>Course Page</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-	<style>		
-	</style>
+	<link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
+    <script src="https://kit.fontawesome.com/bdb6b3cc18.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header class="course-page-header">
-		<h1>My School</h1>
-        <button class="back-button"><a href="index.html">Go Back</a></button>
+    <header>
+		<a href="index.html" class="logo" title="Homepage">Inna Slota.</a>
+
+      <ul class="navlist">
+        <li>
+          <a href="index.html" class="active navlink" title="Home">Home</a>
+        </li>
+        <li>
+          <a href="#courses-section" class="navlink" title="About Me">Courses</a>
+        </li>
+        <li>
+          <a href="#techstack" class="navlink" title="Tech Stack">Tech Stack</a>
+        </li>
+        <li>
+          <a href="#portfolio" class="navlink" title="My Projects"
+            >My Projects</a
+          >
+        </li>
+        <li>
+          <a href="#contact" class="navlink" title="Contact Me">Contact Me</a>
+        </li>
+        <!--
+        <li class="theme-toggle">
+          <div>
+            <input type="checkbox" class="checkbox" id="chk" />
+            <label class="label" for="chk">
+              <i class="bx bx-sun" title="Ligth theme"></i>
+              <i class="bx bx-moon" title="Dark theme"></i>
+              <div class="ball"></div>
+            </label>
+          </div>
+        </li>
+      </ul>
+    -->
+
+      <div class="bx bx-menu" id="menu-icon"></div>
 	</header>
     <main>
-        <div class="container">
+        <div class="course-details">
             <h2 class="course-title">Course Title</h2>
-            <div class="lesson">
-                <h3 class="lesson-title">Lesson 1: Introduction</h3>
-                <a href="https://www.youtube.com/watch?v=VIDEO_ID">Watch Video</a>
-            </div>
-            <div class="lesson restricted">
-                <h3 class="lesson-title">Lesson 2: Topic 1</h3>
-                <a href="#">Locked</a>
-            </div>
-            <div class="lesson restricted">
-                <h3 class="lesson-title">Lesson 3: Topic 2</h3>
-                <a href="#">Locked</a>
-            </div>
-            <div class="lesson restricted">
-                <h3 class="lesson-title">Lesson 4: Topic 3</h3>
-                <a href="#">Locked</a>
-            </div>
-            <div class="lesson restricted">
-                <h3 class="lesson-title">Lesson 5: Topic 4</h3>
-                <a href="#">Locked</a>
-            </div>
+            <p>Welcome to our online school! We are dedicated to providing quality education to students from the comfort and safety of their own homes. Our virtual classrooms allow students to interact with teachers and classmates in real-time, just like in a traditional classroom setting. We offer a wide range of courses to suit every student's needs, from elementary school to high school. Our teachers are highly qualified and experienced, and they are committed to helping each student reach their full potential. At our online school, we strive to provide a personalized learning experience that caters to each student's unique learning style. We believe that education should be accessible to all, and our online platform allows students from all over the world to access our top-notch curriculum. Join us today and discover the many benefits of online learning!</p>
+        </div>
+        <div class="container">
+            <label class="label" for="accordion-1">
+                <input type="checkbox" name="button" id="accordion-1">
+                <span class="text lesson">
+                    <h2 class="lesson-title">Lesson 1: Introduction</h2>
+                    <i class="close fa-solid fa-plus"></i>
+                </span>
+                <span class="content">
+                    <img src="images/course.jpg" class="content-img" alt="">
+                </span>
+            </label>
+            <label class="label" for="accordion-2">
+                <input type="checkbox" name="button" id="accordion-2">
+                <span class="text lesson">
+                    <h2 class="lesson-title">Lesson 2: Introduction</h2>
+                    <i class="close fa-solid fa-plus"></i>
+                </span>
+                <span class="content">
+                    <img src="images/course.jpg" class="content-img" alt="">
+                </span>
+            </label>
+            <label class="label restricted" for="accordion-3">
+                <input type="checkbox" name="button" id="accordion-3">
+                <span class="text lesson">
+                    <h2 class="lesson-title">Lesson 3: Introduction <i class='bx bx-lock-alt'></i></h2>
+                    <i class="close fa-solid fa-plus"></i>
+                </span>
+                <span class="content">
+                    <a href="https://www.youtube.com/watch?v=VIDEO_ID" class="content-img">Watch Video</a>
+                </span>
+            </label>
+            <label class="label restricted" for="accordion-4">
+                <input type="checkbox" name="button" id="accordion-4">
+                <span class="text lesson">
+                    <h2 class="lesson-title">Lesson 4: Introduction <i class='bx bx-lock-alt'></i></h2>
+                    <i class="close fa-solid fa-plus"></i>
+                </span>
+                <span class="content">
+                    <a href="https://www.youtube.com/watch?v=VIDEO_ID" class="content-img">Watch Video</a>
+                </span>
+            </label>
+            <label class="label restricted" for="accordion-5">
+                <input type="checkbox" name="button" id="accordion-5">
+                <span class="text lesson">
+                    <h2 class="lesson-title">Lesson 5: Introduction <i class='bx bx-lock-alt'></i></h2>
+                    <i class="close fa-solid fa-plus"></i>
+                </span>
+                <span class="content">
+                    <a href="https://www.youtube.com/watch?v=VIDEO_ID" class="content-img">Watch Video</a>
+                </span>
+            </label>
         </div>
     </main>
+    <footer>
+		<p>&copy; 2023. My School<br />
+            This project is coded by Inna Slota and <a href="https://github.com/innaslota/education-platform">open-sourced</a>
+        </p>
+        
+	</footer>
 </body>
 </html>
