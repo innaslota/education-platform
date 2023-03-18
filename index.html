@@ -13,44 +13,33 @@
 </head>
 <body>
 	<header>
-		<a href="index.html" class="logo" title="Homepage">Inna Slota.</a>
+		<!--<a href="index.html" class="logo" title="Homepage">Inna Slota.</a>-->
 
       <ul class="navlist">
         <li>
-          <a href="#home" class="active navlink" title="Home">Home</a>
+          <a href="#home" class="active navlink hp-link" title="Home">Home</a>
         </li>
         <li>
-          <a href="#courses-section" class="navlink" title="About Me">Courses</a>
+          <a href="#courses-section" class="navlink hp-link" title="About Me">Courses</a>
         </li>
         <li>
-          <a href="#techstack" class="navlink" title="Tech Stack">Tech Stack</a>
+          <a href="/" class="navlink hp-link course-detail" title="Course detail">Course detail</a>
         </li>
-        <li>
-          <a href="#portfolio" class="navlink" title="My Projects"
-            >My Projects</a
-          >
-        </li>
-        <li>
-          <a href="#contact" class="navlink" title="Contact Me">Contact Me</a>
-        </li>
-        <!--
         <li class="theme-toggle">
-          <div>
-            <input type="checkbox" class="checkbox" id="chk" />
-            <label class="label" for="chk">
-              <i class="bx bx-sun" title="Ligth theme"></i>
-              <i class="bx bx-moon" title="Dark theme"></i>
-              <div class="ball"></div>
-            </label>
-          </div>
+            <div>
+                <input type="checkbox" class="dark-theme-input" id="chk" />
+                <label class="dark-theme-toggler" for="chk">
+                  <i class="bx bx-sun" title="Ligth theme"></i>
+                  <i class="bx bx-moon" title="Dark theme"></i>
+                  <div class="ball"></div>
+                </label>
+            </div>
         </li>
       </ul>
-    -->
-
       <div class="bx bx-menu" id="menu-icon"></div>
 	</header>
 	<main>
-		<section class="main-section">
+		<section class="main-section" id="home">
             <div class="home-text">
                 <div class="slide">
                     <span class="one">Upgrade</span>
@@ -283,8 +272,10 @@
 	<footer>
 		<p>&copy; 2023. My School<br />
             This project is coded by Inna Slota and <a href="https://github.com/innaslota/education-platform">open-sourced</a>
-        </p>
-        
+        </p>      
 	</footer>
+
+    <!--custom JS link-->
+    <script src="app.js"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 * {
     font-family: 'Lato', sans-serif;
+    list-style: none;
 }
 
 :root {
@@ -24,6 +25,22 @@
     --p-font: 1rem;
 }
 
+.dark {
+  --paper-light: #424242;
+  --default-light: #303030;
+  --primary-main: #00838F;
+  --secondary-light: #FFA000;
+  --primary-light: #00BCD4;;
+  --secondary-main: #FF6F00;
+  --text-primary: rgba(245, 245, 245, 0.87);
+
+}
+
+body {
+  background-color: var(--paper-light);
+  margin: 0;
+}
+
 /*Header*/
 
 header {
@@ -34,7 +51,7 @@ header {
     z-index: 1000;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: right;
     background: transparent;
     color: #fff;
     padding: 22px 15%;
@@ -45,10 +62,10 @@ header {
   header.sticky {
     background: linear-gradient(
       180deg,
-      rgba(249, 243, 224, 1) 0%,
+      rgb(255, 255, 255) 0%,
       rgb(46, 195, 225) 180%
     );
-    border-bottom: 1px solid #84d1ea;
+    border-bottom: 1px solid #aedbea;
     padding: 12px 15%;
   }
 
@@ -59,6 +76,10 @@ header {
   .navlist {
     display: flex;
   }
+
+  .navlist .hp-link {
+    color: var(--text-secondary);
+  }
   
   .navlist a {
     color: var(--text-primary);
@@ -67,11 +88,12 @@ header {
     font-weight: 500;
     margin: 0 20px;
     transition: all 0.45s ease;
-    list-style-type:none;
+    margin-right: 30px;
   }
   
   .navlist .theme-toggle {
-    margin-left: 20px;
+    margin-left: 50px;
+    margin-right: 100px;
   }
   
   .navlist a:hover {
@@ -82,6 +104,10 @@ header {
     color: var(--primary-dark);
     font-weight: 800;
     text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  }
+
+  .course-detail {
+    display: none;
   }
   
   #menu-icon {
@@ -251,22 +277,23 @@ header {
 
 
 .courses {
-    display: grid;
+  display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(350px, auto));
-    align-items: center;
+  align-items: center;
 	grid-gap: 20px;
-    width: 90%;
-    margin: 0 auto;
-    padding-bottom: 30px;
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 30px;
 }
 
 
 article {
-    min-width: 200px;
+  min-width: 200px;
 	padding: 10px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  background-color: #f0eded;
 }
 
 img {
@@ -295,8 +322,8 @@ h3 {
 
 .description-tags span {
     font-size: 12px;
-    color: var(--text-primary);
-    border: 1.5px solid var(--secondary-light);
+    color: var(--text-secondary);
+    border: 1.5px solid var(--secondary-main);
     border-radius: 4px;
     padding: 5px 8px;
   }
@@ -370,6 +397,7 @@ footer p {
     margin: 100px auto 10px;
     padding: 0 150px;
     background-color: var(--paper-light);
+    color: var(--text-primary);
 }
 
 .container {
@@ -468,14 +496,51 @@ input:checked ~ .content {
     width: var(--img-width);
 }
 
-/*Adaptive*/
 
-@media (max-width: 512px) {
-    .courses {
-        grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-    }
+/* dark theme toggle*/
 
-    h1 {
-        color: red;
-    }
+.dark-theme-input {
+  opacity: 0;
+  position: absolute;
+}
+
+.dark-theme-toggler {
+  background-color: var(--secondary-light);
+  border: 1px solid var(var(--secondary-main));
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px;
+  position: relative;
+  height: 20px;
+  width: 40px;
+  transform: scale(1.5);
+}
+
+.dark-theme-toggler .ball {
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: 16px;
+  width: 16px;
+  transform: translateX(0px);
+  transition: transform 0.2s linear;
+}
+
+.dark-theme-input:checked + .dark-theme-toggler .ball {
+  transform: translateX(19px);
+}
+
+.bx-moon {
+  color: var(--secondary-main);
+  padding-right: 3px;
+}
+
+.bx-sun {
+  color: var(--secondary-main);
+  padding-left: 3px;
 }
