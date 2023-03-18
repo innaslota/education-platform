@@ -338,6 +338,7 @@ h3 a:hover {
   border: 1.5px solid var(--secondary-main);
   border-radius: 4px;
   padding: 5px 8px;
+  margin-right: 5px;
   }
 
 .stars {
@@ -367,35 +368,43 @@ h3 a:hover {
 }
 
 /*Pagination panel*/
-nav ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	justify-content: center;
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
-nav li {
-	margin: 0 10px;
+.pagination button {
+  width: 20px;
+  height: 20px;
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: var(--secondary-main);
+  margin: 5px;
+  transition: 0.4s;
+  color: var(--default-light);
+  font-size: 12px;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+
 }
 
-nav a {
-	display: block;
-	background-color: var(--secondary-main);
-	color: #fff;
-	padding: 5px 10px;
-	text-align: center;
-	text-decoration: none;
-}
-
-nav a:hover {
+.pagination button:hover {
 	background-color: #666;
 }
+
+.pagination button.active {
+  background-color: #666;
+  box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
+} 
 
 footer {
   background-color: var(--primary-light);
   text-align: center;
-  margin: 0;
+  margin: 10px 0;
   width: 100%;
 }
 
