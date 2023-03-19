@@ -88,7 +88,7 @@ function displayCourses(response) {
     paginatedItems.forEach(function(course) {
     coursesHTML += `
       <article>
-        <img class="course-image" src="images/course.jpg" alt="Course 1">
+        <img class="course-image" src="${course.previewImageLink}/cover.webp" alt="Course 1">
         <div class="lessons-number">
           <a class="btn2"><i class="bx bx-play"></i> <span class="les-number">${course.lessonsCount}&nbsp;</span> Lessons</a>
         </div>
@@ -109,12 +109,23 @@ function displayCourses(response) {
           </div>
           <div class="rating-value">${course.rating}</div>
         </div>
-        <video class="viewer content-img" src="images/652333414.mp4" controls></video>
+        <video class="viewer content-img" id="video-course" controls></video>
       </article>
     `;
     });
     coursesHTML += `</div>`;
     document.querySelector('.courses').innerHTML = coursesHTML;
+
+    const videoPlayers = document.querySelectorAll('.viewer');
+    videoPlayers.forEach((videoPlayer, i) => {
+      const videoSource = `${response.data.courses[i].meta.courseVideoPreview.link}`;
+      const hls = new Hls();
+
+      if (Hls.isSupported()) {
+        hls.loadSource(videoSource);
+        hls.attachMedia(videoPlayer);
+      }
+    });
   }
 
   function setupPagination (items, wrapper, rowsPerPage) {
