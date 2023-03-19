@@ -68,7 +68,7 @@ function navHighlighter() {
   });
 }
 
-/*Fetch API*/
+//Fetch API and Pagination
 
 function displayCourses(response) {
   let coursesInfo = response.data.courses;
@@ -149,7 +149,7 @@ function displayCourses(response) {
   displayList(coursesInfo, currentPage);
   setupPagination(coursesInfo, paginationElement, rows);
 
-  /*Play video on hover*/
+  //Play video on hover
 
   let vids = document.querySelectorAll("video");
 
@@ -170,6 +170,8 @@ function displayCourses(response) {
       vid.pause();
     }
   });
+
+  //Show rating in stars
 
   const ratings = document.querySelectorAll('.rating');
   if (ratings.length > 0) {
@@ -208,7 +210,8 @@ axios.get('https://api.wisey.app/api/v1/core/preview-courses', {
   }
 }).then(displayCourses);
 
-/*Change the speed of the video*/
+//Change the speed of the video
+
 const video = document.querySelector('.player__video')
 const ranges = document.querySelectorAll(".player__slider");
 
