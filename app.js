@@ -109,19 +109,7 @@ function displayCourses(response) {
           </div>
           <div class="rating-value">${course.rating}</div>
         </div>
-        <video class="player__video viewer content-img" src="images/652333414.mp4" controls></video>
-        <div class="player__controls">
-          <input
-            type="range"
-            name="playbackRate"
-            class="player__slider"
-            min="0.5"
-            max="4"
-            step="0.3"
-            value="1"
-          />
-          <p class="instruction">To change the rate of the video while watching, please<br />1. click on the range;<br />2. change the position of the ball either with your mouse or using "ArrowRight"/"ArrowLeft" keys on your keyboard.</p>
-        </div>
+        <video class="viewer content-img" src="images/652333414.mp4" controls></video>
       </article>
     `;
     });
@@ -181,26 +169,6 @@ function displayCourses(response) {
       vid.play();
       vid.pause();
     }
-
-    const ranges = document.querySelectorAll(".player__slider");
-
-    function handleRangeUpdate() {
-      vid[this.name] = this.value;
-    }
-
-    function handleKeyDown(event) {
-      if (event.keyCode === 37) { 
-        vid.playbackRate -= 0.1;
-      } else if (event.keyCode === 39) { 
-        vid.playbackRate += 0.1;
-      }
-    }
-
-    ranges.forEach((range) => range.addEventListener("change", handleRangeUpdate));
-    ranges.forEach((range) => {
-      range.addEventListener("mousemove", handleRangeUpdate);
-      range.addEventListener("keydown", handleKeyDown);
-    });
   });
 
   const ratings = document.querySelectorAll('.rating');
@@ -239,4 +207,26 @@ axios.get('https://api.wisey.app/api/v1/core/preview-courses', {
     'Authorization': `Bearer ${token}`
   }
 }).then(displayCourses);
+
+/*Change the speed of the video*/
+const video = document.querySelector('.player__video')
+const ranges = document.querySelectorAll(".player__slider");
+
+    function handleRangeUpdate() {
+      video[this.name] = this.value;
+    }
+
+    function handleKeyDown(event) {
+      if (event.keyCode === 37) { 
+        vid.playbackRate -= 0.1;
+      } else if (event.keyCode === 39) { 
+        vid.playbackRate += 0.1;
+      }
+    }
+
+    ranges.forEach((range) => range.addEventListener("change", handleRangeUpdate));
+    ranges.forEach((range) => {
+      range.addEventListener("mousemove", handleRangeUpdate);
+      range.addEventListener("keydown", handleKeyDown);
+    });
 
