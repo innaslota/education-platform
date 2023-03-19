@@ -68,122 +68,175 @@ function navHighlighter() {
   });
 }
 
+/*Fetch API*/
+
+function displayCourses(response) {
+  let coursesInfo = response.data.courses;
+  const paginationElement = document.getElementById('pagination');
+
+  let currentPage = 1;
+  let rows = 10;
+
+  function displayList (items, page) {
+    page--;
+
+    let loopStart = rows * page;
+    let loopEnd = loopStart + rows;
+    let paginatedItems = items.slice(loopStart, loopEnd);
+
+    let coursesHTML = `<div class='courses-list'>`;
+    paginatedItems.forEach(function(course) {
+    coursesHTML += `
+      <article>
+        <img class="course-image" src="images/course.jpg" alt="Course 1">
+        <div class="lessons-number">
+          <a class="btn2"><i class="bx bx-play"></i> <span class="les-number">${course.lessonsCount}&nbsp;</span> Lessons</a>
+        </div>
+        <h3><a href="coursepage.html" class="course-link">${course.title}</a></h3>
+        <div class="description-tags">
+          <span>${course.tags[0]}</span>
+        </div>
+        <div class="rating">
+          <div class="rating-body">
+            <div class="rating-active"></div>
+            <div class="rating-items">
+              <input type="radio" class="rating-item" value="1" name="rating">
+              <input type="radio" class="rating-item" value="2" name="rating">
+              <input type="radio" class="rating-item" value="3" name="rating">
+              <input type="radio" class="rating-item" value="4" name="rating">
+              <input type="radio" class="rating-item" value="5" name="rating">
+            </div>
+          </div>
+          <div class="rating-value">${course.rating}</div>
+        </div>
+        <video class="player__video viewer content-img" src="images/652333414.mp4" controls></video>
+        <div class="player__controls">
+          <input
+            type="range"
+            name="playbackRate"
+            class="player__slider"
+            min="0.5"
+            max="4"
+            step="0.3"
+            value="1"
+          />
+          <p class="instruction">To change the rate of the video while watching, please<br />1. click on the range;<br />2. change the position of the ball either with your mouse or using "ArrowRight"/"ArrowLeft" keys on your keyboard.</p>
+        </div>
+      </article>
+    `;
+    });
+    coursesHTML += `</div>`;
+    document.querySelector('.courses').innerHTML = coursesHTML;
+  }
+
+  function setupPagination (items, wrapper, rowsPerPage) {
+    wrapper.innerHTML = "";
+
+    let pageCount = Math.ceil(items.length / rowsPerPage);
+    for (let i = 1; i < pageCount + 1; i++) {
+      let btn = paginationButton(i, items);
+      wrapper.appendChild(btn);
+    }
+  }
+
+  function paginationButton (page, items) {
+    let button = document.createElement('button');
+    button.innerText = page;
+
+    if (currentPage === page) {
+      button.classList.add('active');
+    }
+
+    button.addEventListener('click', function () {
+      currentPage = page;
+      displayList(items, currentPage);
+
+      currentButton = document.querySelector('.pagination button.active');
+      currentButton.classList.remove('active');
+      button.classList.add('active');
+    })
+    return button;
+  }
+
+  displayList(coursesInfo, currentPage);
+  setupPagination(coursesInfo, paginationElement, rows);
+
+  /*Play video on hover*/
+
+  let vids = document.querySelectorAll("video");
+
+  vids.forEach(vid => {
+
+    vid.onmouseenter = function(){
+      vid.muted = true;
+      vid.play();
+    }
+      
+    vid.onmouseleave = function(){
+      vid.muted = true;
+      vid.pause();
+    }
+
+    vid.onclick = function(){
+      vid.play();
+      vid.pause();
+    }
+
+    const ranges = document.querySelectorAll(".player__slider");
+
+    function handleRangeUpdate() {
+      vid[this.name] = this.value;
+    }
+
+    function handleKeyDown(event) {
+      if (event.keyCode === 37) { 
+        vid.playbackRate -= 0.1;
+      } else if (event.keyCode === 39) { 
+        vid.playbackRate += 0.1;
+      }
+    }
+
+    ranges.forEach((range) => range.addEventListener("change", handleRangeUpdate));
+    ranges.forEach((range) => {
+      range.addEventListener("mousemove", handleRangeUpdate);
+      range.addEventListener("keydown", handleKeyDown);
+    });
+  });
+
+  const ratings = document.querySelectorAll('.rating');
+  if (ratings.length > 0) {
+    initRatings();
+  }
+
+  function initRatings() {
+    let ratingActive, ratingValue;
+
+    for(let i = 0; i < ratings.length; i++) {
+      const rating = ratings[i];
+      initRating(rating);
+    }
+
+    function initRating(rating) {
+      initRatingVars(rating);
+      setRatingActiveWidth();
+    }
+
+    function initRatingVars(rating) {
+      ratingActive = rating.querySelector('.rating-active');
+      ratingValue = rating.querySelector('.rating-value')
+    }
+
+    function setRatingActiveWidth(index = ratingValue.innerHTML) {
+      const ratingActiveWidth = index / 0.05;
+      ratingActive.style.width = `${ratingActiveWidth}%`;
+    }
+  }
+}
 
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiYmJmYTJmMS1jOTcwLTRmZjEtOGJmNi03NDkyMTM5NTFlNTQiLCJwbGF0Zm9ybSI6InN1YnNjcmlwdGlvbnMiLCJpYXQiOjE2NzkxNTAwNDEsImV4cCI6MTY4MDA1MDA0MX0.YyX1_dA1jmDBLYKoPfFkVn5MpJ5pa4qMFPBGnXc6W9g";
 axios.get('https://api.wisey.app/api/v1/core/preview-courses', {
   headers: {
     'Authorization': `Bearer ${token}`
   }
-}).then(res => console.log(res));
-
-/*Pagination*/
-
-const articles = [
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-  "<img src='images/course.jpg' alt='Course 1'><div class='lessons-number'><a href='#portfolio' class='btn2'><i class='bx bx-play' title='Watch My Work'></i> 10 Lessons</a></div><h3><a href='coursepage.html' class='course-link'>This is your course title. It should be places here</a></h3><div class='description-tags'><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API</span></div><div class='stars'><span class='star' data-value='1'></span><span class='star' data-value='2'></span><span class='star' data-value='3'></span><span class='star' data-value='4'></span><span class='star' data-value='5'></span></div><video id='video' class='player__video viewer content-img' src='images/652333414.mp4' controls></video>",
-];
-
-const coursesList = document.getElementById('courses');
-const paginationElement = document.getElementById('pagination');
-
-let currentPage = 1;
-let rows = 10;
-
-function displayList (items, wrapper, rowsPerPage, page) {
-  wrapper.innerHTML = "";
-  page--;
-
-  let loopStart = rowsPerPage * page;
-  let loopEnd = loopStart + rowsPerPage;
-  let paginatedItems = items.slice(loopStart, loopEnd);
-
-  for(let i = 0; i < paginatedItems.length; i++) {
-    let item = paginatedItems[i];
-
-    let itemElement = document.createElement('article');
-    itemElement.classList.add('item');
-    itemElement.innerHTML = item;
-
-    wrapper.appendChild(itemElement);
-  }
-}
-
-function setupPagination (items, wrapper, rowsPerPage) {
-  wrapper.innerHTML = "";
-
-  let pageCount = Math.ceil(items.length / rowsPerPage);
-  for (let i = 1; i < pageCount + 1; i++) {
-    let btn = paginationButton(i, items);
-    wrapper.appendChild(btn);
-  }
-}
-
-function paginationButton (page, items) {
-  let button = document.createElement('button');
-  button.innerText = page;
-
-  if (currentPage === page) {
-    button.classList.add('active');
-  }
-
-  button.addEventListener('click', function () {
-    currentPage = page;
-    displayList(items, coursesList, rows, currentPage);
-
-    currentButton = document.querySelector('.pagination button.active');
-    currentButton.classList.remove('active');
-    button.classList.add('active');
-  })
-
-  return button;
-}
-
-
-displayList(articles, coursesList, rows, currentPage);
-setupPagination(articles, paginationElement, rows);
-
-/*Play video on hover*/
-
-let vids = document.querySelectorAll(".content-img");
-
-
-vids.forEach(vid => {
-  vid.onmouseenter = function(){
-    vid.muted = true;
-    vid.play();
-  }
-    
-  vid.onmouseleave = function(){
-    vid.muted = true;
-    vid.pause();
-  }
-});
-
-
+}).then(displayCourses);
 
